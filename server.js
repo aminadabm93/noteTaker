@@ -1,7 +1,7 @@
 // Dependencies
 // =============================================================
 var express = require("express");
-const { fstat } = require("fs");
+const fs = require('fs');
 var path = require("path");
 
 // Sets up the Express App
@@ -21,15 +21,20 @@ app.use(express.json());
 //write routes for posting, reading
 //home index page 
 app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "/../public/index.html"));
+    res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
 app.get("/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "/../public/notes.html"));
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
 app.get("/api/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "/../db/db.json"));
+    // res.sendFile(path.join(__dirname, "./db/db.json"));
+    const data = fs.readFileSync("./db/db.json", "utf8", function (err) {
+        console.log(err);
+    })
+    const notes = JSON.parse(data);
+    res.json(notes);
 });
 
 // Create New note - save to file , return new note 
@@ -43,7 +48,7 @@ app.post("/api/notes", function(req, res) {
     //newCharacter.routeName = newCharacter.name.replace(/\s+/g, "").toLowerCase();
   
     console.log(newNote);
-    let objectsString = fs.readFileSync("./db/db.json","utf8",function(err){
+    let objectsString = fs.readFileSync("./db/db.json",function(err){
         console.log(err);
     });
     let currentData = JSON.parse(objectsString);
@@ -52,7 +57,7 @@ app.post("/api/notes", function(req, res) {
         currentData[i].id=i;
     }
     const writingString = JSON.stringify(currentData);
-    fs.writeFileSync("./db/db.json",json);
+    fs.writeFileSync("./db/db.json",writingString);
     res.json(true);
   });
 
