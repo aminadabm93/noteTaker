@@ -19,7 +19,8 @@ If you want to run this locally, make sure you have node installed. Clone the re
 ## Usage Instructions
 
 This application is deployed at https://notetakermorales.herokuapp.com/notes
-Here is a gif showing how to use the app. ![link](./public/assets/NoteTaker.gif)
+Here is a gif showing how to use the app. 
+![link](./public/assets/NoteTaker.gif)
 
 ## License
 
@@ -40,4 +41,4 @@ Contributors include Aminadab Morales
 
 ## Questions
 Contact me at https://www.github.com/aminadabm93
-linkedin.com/in/aminadab-morales
+https://www.linkedin.com/in/aminadab-morales
